@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-4 mt-5 mx-auto">
+    <form [formGroup]="createForm" (ngSubmit)="create()" >
+
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input formControlName="nom"
+               type="text"
+               [ngClass]="{
+               'is-valid': createForm.get('nom').valid,
+               'is-invalid': createForm.get('nom').invalid && (createForm.get('nom').touched || (createForm.get('nom').dirty))
+               }"
+               name="nom"
+               id="nom"
+               class="form-control">
+        <div *ngIf="createForm.get('nom').invalid && (createForm.get('nom').touched) || (createForm.get('nom').dirty)"
+             class="invalid-feedback">
+          <div *ngIf="createForm.get('nom').getError('required')">this field is required</div>
+        </div>
+      </div>
+      <button class="btn btn-block btn-primary" [disabled]="createForm.invalid">create</button>
+      {{createForm.value | json}}
+    </form>
+  </div>
+</div>

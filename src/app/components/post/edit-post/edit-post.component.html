@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-4 mt-5 mx-auto">
+    <form [formGroup]="editForm" (ngSubmit)="update()" >
+      <div class="form-group">
+        <label [hidden]="true" for="postId">Post Id</label>
+        <input formControlName="groupeId"
+               type="text"
+               class="form-control"
+               id="postId"
+               [hidden]="true"
+        >
+
+      </div>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input formControlName="nom"
+               type="text"
+               [ngClass]="{
+               'is-valid': editForm.get('nom').valid,
+               'is-invalid': editForm.get('nom').invalid && (editForm.get('nom').touched || (editForm.get('nom').dirty))
+               }"
+               name="nom"
+               id="nom"
+               class="form-control">
+        <div *ngIf="editForm.get('nom').invalid && (editForm.get('nom').touched) || (editForm.get('nom').dirty)"
+             class="invalid-feedback">
+          <div *ngIf="editForm.get('nom').getError('required')">this field is required</div>
+        </div>
+      </div>
+      <button class="btn btn-block btn-primary" [disabled]="editForm.invalid">Update</button>
+      {{editForm.value | json}}
+    </form>
+  </div>
+</div>
